@@ -1,0 +1,7 @@
+---
+# Variable setup.
+- name: RSTUDIO | Include OS-specific variables.
+  include_vars: "vars-{{ ansible_os_family | lower }}.yml"
+
+- include_tasks: setup-redhat.yml
+  when: ansible_os_family | lower == 'redhat'

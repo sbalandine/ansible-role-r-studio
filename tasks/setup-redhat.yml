@@ -1,0 +1,33 @@
+---
+- name: Get current RStudio version
+  command: "rstudio-server version"
+  register: rstudio_version_current
+  changed_when: false
+  failed_when: false
+
+- block:
+
+  - name: RSTUDIO | Download RStudio-Server
+    get_url:
+      url: https://download2.rstudio.org/server/centos8/x86_64/rstudio-server-rhel-{{ rstudio_version }}-x86_64.rpm
+      dest: /tmp/rstudio-server-rhel-{{ rstudio_version }}-x86_64.rpm
+      mode: 0644
+
+  - name: RSTUDIO | Install RStudio-Server
+    dnf:
+      name: /tmp/rstudio-server-rhel-{{ rstudio_version }}-x86_64.rpm
+      disable_gpg_check : yes
+      state: present
+
+  - name: RSTUDIO | Remove installer
+    file:
+      path: /tmp/rstudio-{{ rstudio_version }}-x86_64.rpm
+      state: absent
+
+  - name: RSTUDIO | Make sure RStudio-Server is started
+    service:
+      name: rstudio-server
+      enabled: true
+      state: started
+
+  when: "rstudio_version | string not in rstudio_version_current|string"

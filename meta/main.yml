@@ -1,0 +1,16 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: rstudio
+  author: sbalandine
+  description: R Studio for RHEL/CentOS 8.
+  company: "Epicentre"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - 8
+  galaxy_tags:
+    - r
