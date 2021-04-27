@@ -1,3 +1,6 @@
 ---
   rstudio_version: 1.4.1106
   rstudio_checksum: 
+
+  rstudio_port: 8787
+  rstudio_address: 0.0.0.0
